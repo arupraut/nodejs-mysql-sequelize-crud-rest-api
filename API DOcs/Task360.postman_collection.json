@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "dd5eb4a2-ad43-4f70-a61f-2e7bef77d483",
+		"name": "Task360",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/auth/siginup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"abc@yopmail.com\",\n    \"password\": \"1234\",\n    \"first_name\": \"Arup\",\n    \"last_name\": \"Raut\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/siginup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"siginup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/siginin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"abc@yopmail.com\",\n    \"password\": \"1234\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/siginin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"siginin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/auth/siginin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"abc@yopmail.com\",\n    \"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/siginin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"siginin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "210"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d2-nwibkrIq+adSbqb1txVmijRBank\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Mar 2021 17:50:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTYxNzk4MzcsImRhdGEiOnsiaWQiOjEsImVtYWlsIjoiYWJjQHlvcG1haWwuY29tIn0sImlhdCI6MTYxNjE3NjIzN30.r6xqOQp8l8D1tktmMWkCB9mH6XZHxOu5TonO1EltJok\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/task?search=dd",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/task?status=assigned&fromdate=2021-03-18 18:30:00&todate=2021-03-20 18:30:00&order=created_at|asc&search=Task 02&export=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"task"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "assigned",
+							"description": "assigned, deleted, completed"
+						},
+						{
+							"key": "fromdate",
+							"value": "2021-03-18 18:30:00"
+						},
+						{
+							"key": "todate",
+							"value": "2021-03-20 18:30:00"
+						},
+						{
+							"key": "order",
+							"value": "created_at|asc",
+							"description": "task_title|desc, or created_at|asc"
+						},
+						{
+							"key": "search",
+							"value": "Task 02"
+						},
+						{
+							"key": "export",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTYxODExODcsImRhdGEiOnsiaWQiOjEsImVtYWlsIjoiYWJjQHlvcG1haWwuY29tIn0sImlhdCI6MTYxNjE3NzU4N30.dVBhm0gEi7hZwpNXJcxA0bUJtMtT4v0AJxzYG9RsvvU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"task_title\": \"Task 10\",\n    \"task_description\": \"This is an demo task, you can add anything in here.\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task_title\": \"Task 06\",\n    \"task_description\": \"This is an demo task, you can add anything in here.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "164"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a4-2XQZ0Wdh/A51GYUpKOnoRQ0jiLI\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Mar 2021 18:14:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 6,\n    \"task_title\": \"Task 06\",\n    \"task_description\": \"This is an demo task, you can add anything in here.\",\n    \"created_at\": \"2021-03-19T18:14:54.000Z\",\n    \"status\": \"assigned\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/task/2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTYxODExODcsImRhdGEiOnsiaWQiOjEsImVtYWlsIjoiYWJjQHlvcG1haWwuY29tIn0sImlhdCI6MTYxNjE3NzU4N30.dVBhm0gEi7hZwpNXJcxA0bUJtMtT4v0AJxzYG9RsvvU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"completed\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/task/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"task",
+						"5"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/task/2",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/task/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"5"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "/task/6",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTYxODExODcsImRhdGEiOnsiaWQiOjEsImVtYWlsIjoiYWJjQHlvcG1haWwuY29tIn0sImlhdCI6MTYxNjE3NzU4N30.dVBhm0gEi7hZwpNXJcxA0bUJtMtT4v0AJxzYG9RsvvU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/task/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"task",
+						"6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/task/6",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/task/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-PVqvOBXp/zQSxjpafZSePvjz1KM\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Mar 2021 18:25:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"1 Record delete successfully\"\n}"
+				},
+				{
+					"name": "/task/6",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/task/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"5"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-34Jb1PkR5Gj40VvamqHyiD2PyQw\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Mar 2021 18:22:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": false,\n    \"message\": \"You can't delete this task\"\n}"
+				}
+			]
+		}
+	]
+}
