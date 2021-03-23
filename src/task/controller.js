@@ -91,7 +91,6 @@ const controller = {
             if (data.status == "deleted") {
                 res.send({status: false, message: messages.YOU_CANT_DELETE_TASK_FROM_HERE}).end();    
             }
-            console.log("@@data, query", data, query)
             service.update(data, query)
                 .then(response => {
                     if (response[0]==0 && data.status == "completed") {
@@ -116,11 +115,12 @@ const controller = {
                     .then(response => {
                         if (response[0]==0) {
                             res.send({status: false, message: messages.YOU_CANT_DELETE_TASK}).end();    
+                        } else {
+                            res.send({status: true, message: `${response[0]} ${messages.RECORD_DELETE_SUCCESSFULLY}`}).end();    
                         }
-                        res.send({status: true, message: `${response[0]} ${messages.RECORD_DELETE_SUCCESSFULLY}`}).end();
                     })
                     .catch(err => {
-                        res.send(err).end();
+                        res.send({status: false, message: messages.DELETE_OPRATION_FAILD}).end();
                     })
         } catch (err) {
             console.log('Error: L1', err)
