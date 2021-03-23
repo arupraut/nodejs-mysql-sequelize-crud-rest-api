@@ -4,37 +4,25 @@ const Task = db.task;
 
 const service = {
     list: (query) => {
-        try {
-            return new Promise( (resolve, reject) => {
-                Task.findAll({ ...query })
-                    .then(resolve)
-                    .catch(reject)
-            })
-        } catch (err) {
-            console.log('Error: L2', err)
-        }
+        return new Promise( (resolve, reject) => {
+            Task.findAll({ ...query })
+                .then(resolve)
+                .catch(reject)
+        })
     },
     add: (data) => {
-        try {
-            return new Promise( (resolve, reject) => {
-                Task.create({ ...data })
-                    .then(resolve)
-                    .catch(reject)
-            })
-        } catch (err) {
-            console.log('Error: L2', err)
-        }
+        return new Promise( (resolve, reject) => {
+            Task.create({ ...data })
+                .then(resolve)
+                .catch(reject)
+        })
     },
     update: (data, query) => {
-        try {
-            return new Promise( (resolve, reject) => {
-                Task.update(data, query)
-                    .then(resolve)
-                    .catch(reject)
-            })
-        } catch (err) {
-            console.log('Error: L2', err)
-        }
+        return new Promise( (resolve, reject) => {
+            Task.update(data, query)
+                .then(resolve)
+                .catch(reject)
+        })
     }
 }
 

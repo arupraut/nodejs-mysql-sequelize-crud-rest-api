@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
         status: {
             type: Sequelize.STRING
         },
+        added_by: {
+            type: Sequelize.INTEGER
+        },
         created_at: {
             type: Sequelize.DATE
         },

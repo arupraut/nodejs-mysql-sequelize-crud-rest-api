@@ -3,8 +3,15 @@ const messages = require('./language');
 const { csvConvertor } = require('../../helper/functions')
 
 const controller = {
-    list: (req, res) => {
+    list: (req, res, next) => {
         try {
+            // throw new Error('I am uncaught.');
+            
+            // setTimeout(function() {
+            //     var err = new Error('Hello') 
+            //     throw err 
+            // }, 1000)
+
             // Building search query
             var query = {}
             var where = { $and: [] }
@@ -46,12 +53,14 @@ const controller = {
             })
         } catch (err) {
             console.log('Error: L1', err)
+            next(err)
         }
     },
-    add: (req, res) => {
+    add: (req, res, next) => {
         try {
             let data = {}
             data = req.body
+            data.added_by = req.user.id
             data.created_at = Date()
             data.status = 'assigned'
             service.add(data)
@@ -63,12 +72,13 @@ const controller = {
                 })
         } catch (err) {
             console.log('Error: L1', err)
+            next(err)
         }
         
     },
-    update: (req, res) => {
+    update: (req, res, next) => {
         try {
-            var query = { where: { id: req.params.id } }
+            var query = { where: { id: req.params.id, added_by: req.user.id } }
             let data = req.body
             data.updated_at = Date()
             if (data.status == "completed") {
@@ -81,23 +91,26 @@ const controller = {
             if (data.status == "deleted") {
                 res.send({status: false, message: messages.YOU_CANT_DELETE_TASK_FROM_HERE}).end();    
             }
+            console.log("@@data, query", data, query)
             service.update(data, query)
                 .then(response => {
                     if (response[0]==0 && data.status == "completed") {
-                        res.send({status: false, message: messages.RECORD_UPDATE_FAILD}).end();    
+                        res.send({status: false, message: messages.RECORD_UPDATE_FAILD}).end();
+                    } else {
+                        res.send({status: true, message: messages.RECORD_UPDATE_SUCCESSFULLY}).end();
                     }
-                    res.send({status: true, message: messages.RECORD_UPDATE_SUCCESSFULLY}).end();
                 })
                 .catch(err => {
-                    res.send(err).end();
+                    res.send({status: false, message: messages.RECORD_UPDATE_FAILD}).end();
                 })
         } catch (err) {
             console.log('Error: L1', err)
+            next(err)
         }
     },
-    delete: (req, res) => {
+    delete: (req, res, next) => {
         try {
-            let query = { where: { id: req.params.id, status: 'assigned', status: { $ne: 'completed' } } }
+            let query = { where: { id: req.params.id, added_by: req.user.id, status: 'assigned', status: { $ne: 'completed' } } }
             let data = { status: 'deleted', updated_at: Date() }
             service.update(data, query)
                     .then(response => {
@@ -111,6 +124,7 @@ const controller = {
                     })
         } catch (err) {
             console.log('Error: L1', err)
+            next(err)
         }
     }
 }

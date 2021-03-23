@@ -1,9 +1,6 @@
 require('dotenv/config');
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const route = require('./router');
-const db = require("./src/task/model");
-
 
 const app = express();
 
@@ -12,7 +9,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(route)
-// db.sequelize.sync();
+app.use((req, res, next) => {
+ res.status(404).send({
+ status: 404,
+ error: `Not found`
+ })
+})
+
+process.on('uncaughtException', err => {
+  console.log(`Uncaught Exception: ${err.message}`)
+  process.exit(1)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled rejection at ', promise, `reason: ${err.message}`)
+  process.exit(1)
+})
 
 // * Start * //
 app.listen(process.env.PORT, () =>

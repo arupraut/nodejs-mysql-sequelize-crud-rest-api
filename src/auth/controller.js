@@ -5,7 +5,7 @@ const salt = bcrypt.genSaltSync(10);
 var jwt = require('jsonwebtoken');
 
 const controller = {
-    login: (req, res) => {
+    login: (req, res, next) => {
         try {
             let query = {}
             query = req.body
@@ -27,10 +27,11 @@ const controller = {
                 })
         } catch (err) {
             console.log('Error: L1', err)
+            next(err)
         }
         
     },
-    registration: (req, res) => {
+    registration: (req, res, next) => {
         try {
             let data = req.body
             data.created_at = Date()
@@ -44,6 +45,7 @@ const controller = {
                     })
         } catch (err) {
             console.log('Error: L1', err)
+            next(err)
         }
         
     }
